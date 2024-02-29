@@ -1,5 +1,8 @@
 package com.example.demo2.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo2.entities.User;
@@ -16,6 +19,21 @@ public class UserService {
   }
 
   public void create(User user) {
-    this.userRepository.save(user);
+    User userFound = this.userRepository.findByEmail(user.getEmail());
+    if (userFound == null) {
+      this.userRepository.save(user);
+    }
+  }
+
+  public List<User> readAll() {
+    return this.userRepository.findAll();
+  }
+
+  public User read(int id) {
+    Optional<User> optionnalUser = this.userRepository.findById(id);
+    if (optionnalUser.isPresent()) {
+      return optionnalUser.get();
+    }
+    return null;
   }
 }
