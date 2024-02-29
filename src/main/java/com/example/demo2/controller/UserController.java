@@ -27,7 +27,7 @@ class UserController {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<User> search() {
+  public List<User> readAll() {
     return this.userService.readAll();
   }
 

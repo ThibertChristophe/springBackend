@@ -30,9 +30,9 @@ public class UserService {
   }
 
   public User read(int id) {
-    Optional<User> optionnalUser = this.userRepository.findById(id);
-    if (optionnalUser.isPresent()) {
-      return optionnalUser.get();
+    Optional<User> optionalUser = this.userRepository.findById(id);
+    if (optionalUser.isPresent()) {
+      return optionalUser.get();
     }
     return null;
   }
