@@ -3,6 +3,7 @@ package com.example.demo2.entities;
 
 import com.example.demo2.enums.TypeHome;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Home {
   private String city;
   private String state;
   private TypeHome type;
-  @ManyToOne
+  @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
   @JoinColumn(name = "USER_ID") // Pas obligatoire si bien suivit les conventions Spring
   private User user;
 

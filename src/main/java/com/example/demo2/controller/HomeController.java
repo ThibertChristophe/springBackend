@@ -16,7 +16,7 @@ import com.example.demo2.entities.Home;
 import com.example.demo2.services.HomeService;
 
 @RestController
-@RequestMapping("home")
+@RequestMapping(path = "home", produces = MediaType.APPLICATION_JSON_VALUE)
 public class HomeController {
   private final HomeService homeService;
 
