@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,9 +26,10 @@ public class HomeController {
     this.homeService = homeService;
   }
 
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Home> readAll() {
-    return this.homeService.readAll();
+  // Renvoi tout ou avec un filtre ?state=monEtat
+  @GetMapping()
+  public List<Home> readAll(@RequestParam(required = false) String state) {
+    return this.homeService.readAll(state);
   }
 
   @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)

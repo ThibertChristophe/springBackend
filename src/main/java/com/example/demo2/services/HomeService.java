@@ -31,8 +31,14 @@ public class HomeService {
     this.homeRepository.save(home);
   }
 
-  public List<Home> readAll() {
-    return this.homeRepository.findAll();
+  public List<Home> readAll(String state) {
+    // Ici bien tester le null pour tester si le param existe
+    // Et ne pas tester si vide ("")
+    if (state == null) {
+      return this.homeRepository.findAll();
+
+    }
+    return this.homeRepository.findByState(state);
   }
 
   public Home read(int id) {
