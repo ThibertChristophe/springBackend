@@ -15,6 +15,7 @@ public class User {
   private int id;
   @Column(unique = true)
   private String email;
+  private String phonenumber;
 
   public User() {
   }
@@ -35,4 +36,11 @@ public class User {
     this.email = email;
   }
 
+  public String getPhonenumber() {
+    return phonenumber;
+  }
+
+  public void setPhonenumber(String phonenumber) {
+    this.phonenumber = phonenumber;
+  }
 }

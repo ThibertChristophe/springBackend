@@ -44,4 +44,12 @@ public class UserService {
     }
     return userFound;
   }
+
+  public void update(int id, User user) {
+    User currentUser = this.read(id);
+    if (currentUser != null) {
+      currentUser = user;
+      this.userRepository.save(currentUser);
+    }
+  }
 }
