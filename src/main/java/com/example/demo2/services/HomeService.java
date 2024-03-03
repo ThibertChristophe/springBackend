@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo2.entities.Home;
 import com.example.demo2.entities.User;
+import com.example.demo2.enums.TypeHome;
 import com.example.demo2.repositories.HomeRepository;
 
 @Service
@@ -22,8 +23,11 @@ public class HomeService {
   }
 
   public void create(Home home) {
+    // On va chercher le user correspondant sinon on le cree.
     User user = userService.readOrCreate(home.getUser());
     home.setUser(user);
+    // Par defaut on met type home
+    home.setType(TypeHome.HOME);
     this.homeRepository.save(home);
   }
 
