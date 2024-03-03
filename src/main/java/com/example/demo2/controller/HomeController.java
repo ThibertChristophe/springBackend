@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,4 +41,15 @@ public class HomeController {
     this.homeService.create(home);
   }
 
+  @ResponseStatus(value = HttpStatus.NO_CONTENT)
+  @DeleteMapping()
+  public void deleteAll() {
+    this.homeService.deleteAll();
+  }
+
+  @ResponseStatus(value = HttpStatus.NO_CONTENT)
+  @DeleteMapping(path = "{id}")
+  public void delete(@PathVariable int id) {
+    this.homeService.deleteById(id);
+  }
 }

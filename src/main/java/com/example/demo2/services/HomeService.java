@@ -38,4 +38,12 @@ public class HomeService {
     }
     return null;
   }
+
+  public void deleteAll() {
+    this.homeRepository.deleteAll();
+  }
+
+  public void deleteById(int id) {
+    this.homeRepository.deleteById(id);
+  }
 }
