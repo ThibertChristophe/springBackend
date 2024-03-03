@@ -1,0 +1,3 @@
+ALTER TABLE USER
+ADD LOGIN varchar(50),
+ADD PASSWORD varchar(50);
