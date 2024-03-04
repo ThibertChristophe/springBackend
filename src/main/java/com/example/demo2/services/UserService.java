@@ -37,6 +37,11 @@ public class UserService {
     return null;
   }
 
+  public User readByLogin(String login) {
+    User userFound = this.userRepository.findByLogin(login);
+    return userFound;
+  }
+
   public User readOrCreate(User user) {
     User userFound = this.userRepository.findByEmail(user.getEmail());
     if (userFound == null) {
