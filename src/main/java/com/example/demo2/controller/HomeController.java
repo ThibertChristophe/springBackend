@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,5 +54,11 @@ public class HomeController {
   @DeleteMapping(path = "{id}")
   public void delete(@PathVariable int id) {
     this.homeService.deleteById(id);
+  }
+
+  @ResponseStatus(value = HttpStatus.NO_CONTENT)
+  @PutMapping(path = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+  public void udate(@PathVariable int id, @RequestBody Home home) {
+    this.homeService.update(id, home);
   }
 }

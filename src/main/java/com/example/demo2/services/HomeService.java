@@ -49,6 +49,14 @@ public class HomeService {
     return null;
   }
 
+  public void update(int id, Home home) {
+    Home currentHome = this.read(id);
+    if (currentHome != null) {
+      currentHome = home;
+      this.homeRepository.save(currentHome);
+    }
+  }
+
   public void deleteAll() {
     this.homeRepository.deleteAll();
   }
