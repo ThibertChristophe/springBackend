@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.demo2.entities.User;
+import com.example.demo2.exceptions.UserNotFoundException;
 import com.example.demo2.repositories.UserRepository;
 
 @Service
@@ -34,7 +35,7 @@ public class UserService {
     if (optionalUser.isPresent()) {
       return optionalUser.get();
     }
-    return null;
+    throw new UserNotFoundException(id);
   }
 
   public User readByLogin(String login) {
