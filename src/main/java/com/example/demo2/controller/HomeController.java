@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,8 +35,9 @@ public class HomeController {
   }
 
   @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Home read(@PathVariable int id) {
-    return this.homeService.read(id);
+  public ResponseEntity<Home> read(@PathVariable int id) {
+    Home home = this.homeService.read(id);
+    return ResponseEntity.ok(home);
   }
 
   @ResponseStatus(value = HttpStatus.CREATED)

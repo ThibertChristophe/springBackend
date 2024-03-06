@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo2.entities.Home;
 import com.example.demo2.entities.User;
 import com.example.demo2.enums.TypeHome;
+import com.example.demo2.exceptions.HomeNotFoundException;
 import com.example.demo2.repositories.HomeRepository;
 
 @Service
@@ -46,7 +47,7 @@ public class HomeService {
     if (optionalHome.isPresent()) {
       return optionalHome.get();
     }
-    return null;
+    throw new HomeNotFoundException(id);
   }
 
   public void update(int id, Home home) {
