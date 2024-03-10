@@ -40,6 +40,8 @@ public class UserService {
 
   public User readByLogin(String login) {
     User userFound = this.userRepository.findByLogin(login);
+    if (userFound == null)
+      throw new UserNotFoundException();
     return userFound;
   }
 
@@ -56,6 +58,8 @@ public class UserService {
     if (currentUser != null) {
       currentUser = user;
       this.userRepository.save(currentUser);
+    } else {
+      throw new UserNotFoundException(id);
     }
   }
 }

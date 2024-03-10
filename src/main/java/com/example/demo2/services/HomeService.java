@@ -55,6 +55,8 @@ public class HomeService {
     if (currentHome != null) {
       currentHome = home;
       this.homeRepository.save(currentHome);
+    } else {
+      throw new HomeNotFoundException(id);
     }
   }
 
