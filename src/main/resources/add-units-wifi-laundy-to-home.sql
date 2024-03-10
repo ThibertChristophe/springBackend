@@ -1,0 +1,4 @@
+ALTER TABLE HOME 
+ADD AVAILABLEUNITS integer,
+ADD WIFI boolean,
+ADD LAUNDRY boolean;

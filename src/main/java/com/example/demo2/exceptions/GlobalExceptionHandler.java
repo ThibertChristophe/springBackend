@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+  // Ici on montre 2 syntaxe de hanlde d'exception
+  //
+  //
+  //
   @ExceptionHandler(HomeNotFoundException.class)
   public ResponseEntity<ErrorResponse> handleHomeNotFoundException(HomeNotFoundException ex) {
     ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());

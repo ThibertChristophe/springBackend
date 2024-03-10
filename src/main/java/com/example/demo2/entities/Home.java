@@ -24,6 +24,9 @@ public class Home {
   private String name;
   private String city;
   private String state;
+  private int availableUnits;
+  private boolean wifi;
+  private boolean laundry;
   private TypeHome type;
   @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
   @JoinColumn(name = "USER_ID") // Pas obligatoire si bien suivit les conventions Spring
@@ -32,12 +35,16 @@ public class Home {
   public Home() {
   }
 
-  public Home(int id, String street, String name, String city, String state, TypeHome type, User user) {
+  public Home(int id, String street, String name, String city, String state, int availableUnits, boolean wifi,
+      boolean laundry, TypeHome type, User user) {
     this.id = id;
     this.street = street;
     this.name = name;
     this.city = city;
     this.state = state;
+    this.availableUnits = availableUnits;
+    this.wifi = wifi;
+    this.laundry = laundry;
     this.type = type;
     this.user = user;
   }
@@ -96,6 +103,30 @@ public class Home {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  public int getAvailableUnits() {
+    return availableUnits;
+  }
+
+  public void setAvailableUnits(int availableUnits) {
+    this.availableUnits = availableUnits;
+  }
+
+  public boolean isWifi() {
+    return wifi;
+  }
+
+  public void setWifi(boolean wifi) {
+    this.wifi = wifi;
+  }
+
+  public boolean isLaundry() {
+    return laundry;
+  }
+
+  public void setLaundry(boolean laundry) {
+    this.laundry = laundry;
   }
 
 }
