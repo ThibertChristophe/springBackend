@@ -1,0 +1,7 @@
+CREATE TABLE BOOKING(
+  ID integer primary key not null AUTO_INCREMENT,
+  HOME_ID integer,
+  CONSTRAINT home_booking_fk FOREIGN KEY (HOME_ID) REFERENCES HOME(ID),
+  USER_ID integer,
+  CONSTRAINT user_booking_fk FOREIGN KEY (USER_ID) REFERENCES USER(ID)
+);
