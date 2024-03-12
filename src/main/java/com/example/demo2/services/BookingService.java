@@ -27,4 +27,12 @@ public class BookingService {
     booking.setHome(home);
     this.bookingRepository.save(booking);
   }
+
+  public Booking read(int idUser, int idHome) {
+    Booking booking = this.bookingRepository.findByUser_idAndHome_id(idUser, idHome);
+    if (booking == null) {
+      throw new Error();
+    }
+    return booking;
+  }
 }

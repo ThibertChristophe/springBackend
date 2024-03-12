@@ -22,6 +22,9 @@ public class Booking {
   @JoinColumn(name = "HOME_ID") // Pas obligatoire si bien suivit les conventions Spring
   private Home home;
 
+  public Booking() {
+  }
+
   public Booking(int id, User user, Home home) {
     this.id = id;
     this.user = user;
