@@ -21,8 +21,7 @@ public class BookingService {
   }
 
   public void create(Booking booking) {
-    // On va chercher le user correspondant sinon on le cree.
-    User user = userService.readOrCreate(booking.getUser());
+    User user = userService.read(booking.getUser().getId());
     Home home = homeService.read(booking.getHome().getId());
     booking.setUser(user);
     booking.setHome(home);
