@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo2.entities.Booking;
 import com.example.demo2.entities.Home;
 import com.example.demo2.entities.User;
+import com.example.demo2.exceptions.BookingNotFoundException;
 import com.example.demo2.repositories.BookingRepository;
 
 @Service
@@ -31,7 +32,7 @@ public class BookingService {
   public Booking read(int idUser, int idHome) {
     Booking booking = this.bookingRepository.findByUser_idAndHome_id(idUser, idHome);
     if (booking == null) {
-      throw new Error();
+      throw new BookingNotFoundException();
     }
     return booking;
   }
