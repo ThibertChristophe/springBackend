@@ -36,4 +36,8 @@ public class BookingService {
     }
     return booking;
   }
+
+  public void deleteById(int id) {
+    this.bookingRepository.deleteById(id);
+  }
 }
