@@ -38,8 +38,8 @@ public class UserService {
     throw new UserNotFoundException(id);
   }
 
-  public User readByLogin(String login) {
-    User userFound = this.userRepository.findByLogin(login);
+  public User readByUsername(String username) {
+    User userFound = this.userRepository.findByUsername(username);
     if (userFound == null)
       throw new UserNotFoundException();
     return userFound;

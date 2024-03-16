@@ -1,20 +1,20 @@
 package com.example.springBackend.dto;
 
 public class LoginRequest {
-  private String login;
+  private String username;
   private String password;
 
-  public LoginRequest(String login, String password) {
-    this.login = login;
+  public LoginRequest(String username, String password) {
+    this.username = username;
     this.password = password;
   }
 
-  public String getLogin() {
-    return login;
+  public String getUsername() {
+    return username;
   }
 
-  public void setLogin(String login) {
-    this.login = login;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public String getPassword() {

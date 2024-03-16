@@ -45,13 +45,13 @@ class UserController {
 
   @ResponseStatus(value = HttpStatus.NO_CONTENT)
   @PutMapping(path = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-  public void udate(@PathVariable int id, @RequestBody User user) {
+  public void update(@PathVariable int id, @RequestBody User user) {
     this.userService.update(id, user);
   }
 
-  @GetMapping(path = "/login/{login}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<User> findByLogin(@PathVariable String login) {
-    User user = this.userService.readByLogin(login);
+  @GetMapping(path = "/username/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<User> findByUsername(@PathVariable String username) {
+    User user = this.userService.readByUsername(username);
     if (user == null) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }

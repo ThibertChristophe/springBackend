@@ -1,15 +1,12 @@
 package com.example.springBackend.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Table(name = "USER")
@@ -24,17 +21,20 @@ public class User implements UserDetails {
   private String username;
   private String password;
   private boolean enabled = false;
+  @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+  private Role role;
 
   public User() {
   }
-  
-  public User(int id, String email, String phoneNumber, String username, String password, boolean enabled) {
+
+  public User(int id, String email, String phoneNumber, String username, String password, boolean enabled, Role role) {
     this.id = id;
     this.email = email;
     this.phoneNumber = phoneNumber;
     this.username = username;
     this.password = password;
     this.enabled = enabled;
+    this.role = role;
   }
 
   public int getId() {
@@ -69,9 +69,17 @@ public class User implements UserDetails {
     this.password = password;
   }
 
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
+  }
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return null;
+    return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + this.role.getTypeRole().name()));
   }
 
   @Override

@@ -26,7 +26,7 @@ public class AuthController {
   @ResponseStatus(value = HttpStatus.OK)
   @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-    User user = userService.readByLogin(loginRequest.getLogin());
+    User user = userService.readByUsername(loginRequest.getUsername());
     if (user == null) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User non trouvé");
     }

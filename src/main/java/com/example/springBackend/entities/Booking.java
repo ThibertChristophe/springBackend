@@ -16,10 +16,10 @@ public class Booking {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-  @JoinColumn(name = "USER_ID") // Pas obligatoire si bien suivit les conventions Spring
+  @JoinColumn(name = "user_id") // Pas obligatoire si bien suivit les conventions Spring
   private User user;
   @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-  @JoinColumn(name = "HOME_ID") // Pas obligatoire si bien suivit les conventions Spring
+  @JoinColumn(name = "home_id") // Pas obligatoire si bien suivit les conventions Spring
   private Home home;
 
   public Booking() {
