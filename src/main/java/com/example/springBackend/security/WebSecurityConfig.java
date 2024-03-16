@@ -14,9 +14,9 @@ public class WebSecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .csrf(AbstractHttpConfigurer::disable) //desactive le cross side origin
+                .csrf(AbstractHttpConfigurer::disable) // désactive le cross side origin CORS
                 .authorizeHttpRequests(
-                        authorize -> authorize.requestMatchers("/home").permitAll().anyRequest().authenticated()
+                        authorize -> authorize.requestMatchers("/home").permitAll().anyRequest().authenticated() // autorise la route /home
                 ).build();
     }
 }
