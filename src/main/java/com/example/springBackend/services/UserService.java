@@ -18,10 +18,12 @@ public class UserService {
   // Inject du repo
   private final UserRepository userRepository;
   private final BCryptPasswordEncoder passwordEncoder;
+  private final ValidationService validationService;
 
-  public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+  public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, ValidationService validationService) {
     this.userRepository = userRepository;
       this.passwordEncoder = passwordEncoder;
+      this.validationService = validationService;
   }
 
   public void create(User user) {
@@ -32,7 +34,8 @@ public class UserService {
       roleUser.setTypeRole(TypeRole.USER);
       user.setRole(roleUser);
       user.setPassword(this.passwordEncoder.encode(user.getPassword()));
-      this.userRepository.save(user);
+      user = this.userRepository.save(user);
+      this.validationService.register(user);
     }
   }
 
