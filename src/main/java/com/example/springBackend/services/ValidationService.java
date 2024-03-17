@@ -19,6 +19,7 @@ public class ValidationService {
         this.notificationService = notificationService;
     }
 
+    // Crée la validation en attente et envoi le mail avec le code de validation
     public void register(User user){
         Instant created = Instant.now();
         Instant expires = created.plus(10, ChronoUnit.MINUTES);

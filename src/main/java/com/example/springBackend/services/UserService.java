@@ -35,6 +35,7 @@ public class UserService {
       user.setRole(roleUser);
       user.setPassword(this.passwordEncoder.encode(user.getPassword()));
       user = this.userRepository.save(user);
+      // Cree une validation de compte
       this.validationService.register(user);
     }
   }

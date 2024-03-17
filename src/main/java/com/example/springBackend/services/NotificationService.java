@@ -13,6 +13,7 @@ public class NotificationService {
         this.javaMailSender = javaMailSender;
     }
 
+    // Envoi le mail avec le code de validation
     public void send(Validation validation){
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom("no-rely@test.com");
