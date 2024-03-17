@@ -3,6 +3,9 @@ package com.example.springBackend.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.springBackend.entities.Role;
+import com.example.springBackend.enums.TypeRole;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.springBackend.entities.User;
@@ -14,14 +17,21 @@ public class UserService {
 
   // Inject du repo
   private final UserRepository userRepository;
+  private final BCryptPasswordEncoder passwordEncoder;
 
-  public UserService(UserRepository userRepository) {
+  public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;
+      this.passwordEncoder = passwordEncoder;
   }
 
   public void create(User user) {
+    if(!user.getEmail().contains("@")) throw new RuntimeException("Email invalide");
     User userFound = this.userRepository.findByEmail(user.getEmail());
     if (userFound == null) {
+      Role roleUser = new Role();
+      roleUser.setTypeRole(TypeRole.USER);
+      user.setRole(roleUser);
+      user.setPassword(this.passwordEncoder.encode(user.getPassword()));
       this.userRepository.save(user);
     }
   }

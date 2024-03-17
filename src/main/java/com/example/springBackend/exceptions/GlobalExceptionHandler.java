@@ -23,14 +23,12 @@ public class GlobalExceptionHandler {
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ExceptionHandler(UserNotFoundException.class)
   public @ResponseBody ErrorResponse handleUserNotFoundException(UserNotFoundException ex) {
-    ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
-    return errorResponse;
+      return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
   }
 
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ExceptionHandler(BookingNotFoundException.class)
   public @ResponseBody ErrorResponse handleBookingNotFoundException(BookingNotFoundException ex) {
-    ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
-    return errorResponse;
+      return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
   }
 }
