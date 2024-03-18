@@ -16,7 +16,7 @@ import com.example.springBackend.exceptions.UserNotFoundException;
 import com.example.springBackend.repositories.UserRepository;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService{
 
   // Inject du repo
   private final UserRepository userRepository;
@@ -81,4 +81,8 @@ public class UserService {
   }
 
 
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    return this.readByUsername(username);
+  }
 }

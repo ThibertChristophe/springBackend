@@ -4,6 +4,9 @@ import com.example.springBackend.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,11 +23,11 @@ import com.example.springBackend.services.UserService;
 public class AuthController {
 
   private final UserService userService;
-  private final BCryptPasswordEncoder passwordEncoder;
+  private final AuthenticationManager authenticationManager;
 
-  public AuthController(UserService userService, BCryptPasswordEncoder passwordEncoder) {
+  public AuthController(UserService userService, AuthenticationManager authenticationManager) {
     this.userService = userService;
-      this.passwordEncoder = passwordEncoder;
+    this.authenticationManager = authenticationManager;
   }
 
   @ResponseStatus(value = HttpStatus.OK)
@@ -34,10 +37,8 @@ public class AuthController {
     if (user == null) {
       throw new UserNotFoundException();
     }
-    // verif mot de passe
-    if (!passwordEncoder.matches(loginRequest.getPassword(),user.getPassword())) {
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credentials incorrect");
-    }
-    return ResponseEntity.ok().build();
+    final Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+
+    return ResponseEntity.ok().body(authenticate);
   }
 }

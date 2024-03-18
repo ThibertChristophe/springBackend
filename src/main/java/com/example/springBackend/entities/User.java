@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+
 import java.util.Collection;
 
 @Entity
 @Table(name = "USER")
-public class User{
+public class User implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
@@ -59,6 +60,11 @@ public class User{
     this.phoneNumber = phoneNumber;
   }
 
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return null;
+  }
+
   public String getPassword() {
     return password;
   }
@@ -69,6 +75,21 @@ public class User{
 
   public String getUsername() {
     return this.username;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return enabled;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return enabled;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return enabled;
   }
 
   public boolean isEnabled() {
