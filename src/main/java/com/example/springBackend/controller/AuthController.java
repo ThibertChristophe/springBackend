@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,12 +34,19 @@ public class AuthController {
   @ResponseStatus(value = HttpStatus.OK)
   @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-    User user = userService.readByUsername(loginRequest.getUsername());
-    if (user == null) {
-      throw new UserNotFoundException();
+//    User user = userService.readByUsername(loginRequest.getUsername());
+//    if (user == null) {
+//      throw new UserNotFoundException();
+//    }
+    try{
+      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+    }catch(BadCredentialsException e){
+      // creer une Exception et l ajouter dans notre handler
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
     }
-    final Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
-    return ResponseEntity.ok().body(authenticate);
+    // recup le user
+    // generer le token
+    // renvoyer le token
+      return ResponseEntity.ok().build();
   }
 }
