@@ -1,16 +1,20 @@
 package com.example.springBackend.security;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -20,10 +24,11 @@ public class WebSecurityConfig {
                         //authorize -> authorize.requestMatchers("/**").permitAll()
                         authorize ->
                                 authorize
-                                        .requestMatchers("/home/*").permitAll()
-                                        .requestMatchers("/user/*").permitAll()
-                                        .requestMatchers("/auth/*").permitAll()
-                                        .requestMatchers("/booking/*").permitAll()
+                                        .requestMatchers("/home/**").permitAll()
+                                        .requestMatchers("/user/**").permitAll()
+                                        .requestMatchers("/auth/**").permitAll()
+                                        .requestMatchers("/auth/login/**").permitAll()
+                                        .requestMatchers("/booking/**").permitAll()
                                         .anyRequest().authenticated() /// autorise la route /home
                 ).build();
     }
@@ -32,4 +37,12 @@ public class WebSecurityConfig {
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+//    @Bean
+//    public AuthenticationProvider authenticationProvider(){
+//        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+//        daoAuthenticationProvider.setUserDetailsService(this.userService);
+//        daoAuthenticationProvider.setPasswordEncoder(this.passwordEncoder());
+//        return daoAuthenticationProvider;
+//    }
 }

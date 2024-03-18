@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import com.example.springBackend.entities.Role;
 import com.example.springBackend.enums.TypeRole;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -76,4 +79,6 @@ public class UserService {
       throw new UserNotFoundException(id);
     }
   }
+
+
 }

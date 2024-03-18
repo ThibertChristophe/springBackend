@@ -1,6 +1,10 @@
 package com.example.springBackend.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 @Entity
 @Table(name = "USER")
@@ -54,6 +58,7 @@ public class User{
   public void setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
   }
+
   public String getPassword() {
     return password;
   }

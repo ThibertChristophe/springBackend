@@ -1,8 +1,10 @@
 package com.example.springBackend.controller;
 
+import com.example.springBackend.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +20,11 @@ import com.example.springBackend.services.UserService;
 public class AuthController {
 
   private final UserService userService;
+  private final BCryptPasswordEncoder passwordEncoder;
 
-  public AuthController(UserService userService) {
+  public AuthController(UserService userService, BCryptPasswordEncoder passwordEncoder) {
     this.userService = userService;
+      this.passwordEncoder = passwordEncoder;
   }
 
   @ResponseStatus(value = HttpStatus.OK)
@@ -28,12 +32,12 @@ public class AuthController {
   public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
     User user = userService.readByUsername(loginRequest.getUsername());
     if (user == null) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User non trouvé");
+      throw new UserNotFoundException();
     }
     // verif mot de passe
-    if (!user.getPassword().equals(loginRequest.getPassword())) {
+    if (!passwordEncoder.matches(loginRequest.getPassword(),user.getPassword())) {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credentials incorrect");
     }
-    return ResponseEntity.status(HttpStatus.OK).body("");
+    return ResponseEntity.ok().build();
   }
 }
