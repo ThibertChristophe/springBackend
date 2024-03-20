@@ -27,7 +27,7 @@ public class AuthController {
   private final JwtUtil jwtUtil;
 
   public AuthController(AuthenticationManager authenticationManager, UserService userService, JwtUtil jwtUtil) {
-    this.authenticationManager = authenticationManager;
+      this.authenticationManager = authenticationManager;
       this.userService = userService;
       this.jwtUtil = jwtUtil;
   }
@@ -35,15 +35,15 @@ public class AuthController {
   @ResponseStatus(value = HttpStatus.OK)
   @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-    try{
-      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-    }catch(BadCredentialsException e){
-      // creer une Exception et l ajouter dans notre handler
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
-    }
-    User user = userService.readByUsername(loginRequest.getUsername());
-    String token = jwtUtil.createToken(user);
-    Bearer bearer = new Bearer(token);
-    return ResponseEntity.ok().body(bearer);
+      try{
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+      }catch(BadCredentialsException e){
+        // creer une Exception et l ajouter dans notre handler
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+      }
+      User user = userService.readByUsername(loginRequest.getUsername());
+      String token = jwtUtil.createToken(user);
+      Bearer bearer = new Bearer(token);
+      return ResponseEntity.ok(bearer);
   }
 }
