@@ -25,15 +25,11 @@ public class WebSecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable) // désactive le cross side origin CORS
                 .authorizeHttpRequests(
-                        authorize -> authorize.requestMatchers("/**").permitAll()
-//                        authorize ->
-//                                authorize
-//                                        .requestMatchers("/home/**").permitAll()
-//                                        .requestMatchers("/user/**").permitAll()
-//                                        .requestMatchers("/auth/**").permitAll()
-//                                        .requestMatchers("/auth/login/**").permitAll()
-//                                        .requestMatchers("/booking/**").permitAll()
-//                                        .anyRequest().authenticated() /// autorise la route /home
+                        //authorize -> authorize.requestMatchers("/**").permitAll()
+                        authorize ->
+                                authorize
+                                        .requestMatchers("/auth/login**").permitAll()
+                                        .anyRequest().authenticated()
                 ).build();
     }
 
