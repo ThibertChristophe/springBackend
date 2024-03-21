@@ -28,13 +28,13 @@ class UserController {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<User> readAll() {
-    return this.userService.readAll();
+  public ResponseEntity<List<User>> readAll() {
+    return ResponseEntity.ok(this.userService.readAll());
   }
 
   @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public User read(@PathVariable int id) {
-    return this.userService.read(id);
+  public ResponseEntity<User> read(@PathVariable int id) {
+    return ResponseEntity.ok(this.userService.read(id));
   }
 
   @ResponseStatus(value = HttpStatus.CREATED)

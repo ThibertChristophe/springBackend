@@ -30,8 +30,8 @@ public class HomeController {
 
   // Renvoi tout ou avec un filtre ?state=monEtat
   @GetMapping()
-  public List<Home> readAll(@RequestParam(required = false) String state) {
-    return this.homeService.readAll(state);
+  public ResponseEntity<List<Home>> readAll(@RequestParam(required = false) String state) {
+    return ResponseEntity.ok(this.homeService.readAll(state));
   }
 
   @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
