@@ -60,7 +60,7 @@ public class HomeController {
 
   @ResponseStatus(value = HttpStatus.NO_CONTENT)
   @PutMapping(path = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-  public void udate(@PathVariable int id, @RequestBody Home home) {
+  public void update(@PathVariable int id, @RequestBody Home home) {
     this.homeService.update(id, home);
   }
 }

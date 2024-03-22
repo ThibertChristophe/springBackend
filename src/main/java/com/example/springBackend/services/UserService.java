@@ -74,6 +74,7 @@ public class UserService implements UserDetailsService{
     User currentUser = this.read(id);
     if (currentUser != null) {
       currentUser = user;
+      user.setPassword(this.passwordEncoder.encode(user.getPassword()));
       this.userRepository.save(currentUser);
     } else {
       throw new UserNotFoundException(id);

@@ -37,7 +37,7 @@ public class WebSecurityConfig {
                         authorize ->
                                 authorize
                                         .requestMatchers("/auth/login**").permitAll()
-                                        .requestMatchers(HttpMethod.GET, "/home**").permitAll()
+                                        .requestMatchers(HttpMethod.GET, "/home").permitAll()
                                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
