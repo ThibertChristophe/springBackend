@@ -3,17 +3,13 @@ package com.example.springBackend.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.springBackend.dto.BookingDTO;
 import com.example.springBackend.entities.Booking;
 import com.example.springBackend.services.BookingService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "booking", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -22,6 +18,12 @@ public class BookingController {
 
   public BookingController(BookingService bookingService) {
     this.bookingService = bookingService;
+  }
+
+  @GetMapping
+  public ResponseEntity<List<Booking>> readAll(){
+    List<Booking> bookings = bookingService.readAll();
+    return ResponseEntity.ok(bookings);
   }
 
   @ResponseStatus(value = HttpStatus.CREATED)

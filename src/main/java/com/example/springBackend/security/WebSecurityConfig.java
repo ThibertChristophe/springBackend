@@ -4,6 +4,7 @@ package com.example.springBackend.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -36,6 +37,7 @@ public class WebSecurityConfig {
                         authorize ->
                                 authorize
                                         .requestMatchers("/auth/login**").permitAll()
+                                        .requestMatchers(HttpMethod.GET, "/home**").permitAll()
                                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)

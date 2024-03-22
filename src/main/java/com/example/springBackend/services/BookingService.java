@@ -8,6 +8,8 @@ import com.example.springBackend.entities.User;
 import com.example.springBackend.exceptions.BookingNotFoundException;
 import com.example.springBackend.repositories.BookingRepository;
 
+import java.util.List;
+
 @Service
 public class BookingService {
   private final BookingRepository bookingRepository;
@@ -19,6 +21,10 @@ public class BookingService {
     this.bookingRepository = bookingRepository;
     this.userService = userService;
     this.homeService = homeService;
+  }
+
+  public List<Booking> readAll() {
+    return bookingRepository.findAll();
   }
 
   public void create(Booking booking) {
@@ -40,4 +46,6 @@ public class BookingService {
   public void deleteById(int id) {
     this.bookingRepository.deleteById(id);
   }
+
+
 }
