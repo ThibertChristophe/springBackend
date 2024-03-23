@@ -31,19 +31,21 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         this.mapper = mapper;
     }
 
+    // Filtre/middleware JWT qui permet de savoir si on a bien un JWT valide
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Map<String, Object> errorDetails = new HashMap<>();
 
         try {
-            String accessToken = jwtUtil.resolveToken(request);
+            String accessToken = jwtUtil.resolveToken(request); // Recupere le token dans le header Authorization
+
             if (accessToken == null ) {
-                filterChain.doFilter(request, response);
+                filterChain.doFilter(request, response); // Refus d'acces
                 return;
             }
-            Claims claims = jwtUtil.resolveClaims(request);
 
-            if(claims != null & jwtUtil.validateClaims(claims)){
+            Claims claims = jwtUtil.resolveClaims(request);
+            if(claims != null & jwtUtil.validateClaims(claims)){ // Recup des claims valident
                 String username = claims.getSubject();
                 Authentication authentication =
                         new UsernamePasswordAuthenticationToken(username,"",new ArrayList<>());
