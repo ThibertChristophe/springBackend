@@ -35,3 +35,4 @@ out/
 
 ### VS Code ###
 .vscode/
+artifacts/springBackend_main_jar/springBackend.main.jar
