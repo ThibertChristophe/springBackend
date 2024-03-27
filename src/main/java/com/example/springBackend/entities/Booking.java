@@ -24,14 +24,16 @@ public class Booking {
   @JoinColumn(name = "home_id") // Pas obligatoire si bien suivit les conventions Spring
   private Home home;
   private Date date_created;
+  private Date date_selected;
 
   public Booking() {
   }
 
-  public Booking(int id, User user, Home home, Date date_created) {
+  public Booking(int id, User user, Home home,Date date_selected, Date date_created) {
     this.id = id;
     this.user = user;
     this.home = home;
+    this.date_selected = date_selected;
     this.date_created = date_created;
   }
 
@@ -65,5 +67,13 @@ public class Booking {
 
   public void setDate_created(Date date_created) {
     this.date_created = date_created;
+  }
+
+  public Date getDate_selected() {
+    return date_selected;
+  }
+
+  public void setDate_selected(Date date_selected) {
+    this.date_selected = date_selected;
   }
 }
