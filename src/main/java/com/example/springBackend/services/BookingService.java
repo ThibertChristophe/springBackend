@@ -33,7 +33,7 @@ public class BookingService {
     Home home = homeService.read(booking.getHome().getId());
     booking.setUser(user);
     booking.setHome(home);
-    booking.setDate_created(Date.from(new Date().toInstant()));
+    //booking.setDate_created(Date.from(new Date().toInstant()));
     this.bookingRepository.save(booking);
   }
 

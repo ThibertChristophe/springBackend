@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
 
@@ -23,6 +24,7 @@ public class Booking {
   @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
   @JoinColumn(name = "home_id") // Pas obligatoire si bien suivit les conventions Spring
   private Home home;
+  @CreatedDate
   private Date date_created;
   private Date date_selected;
 
