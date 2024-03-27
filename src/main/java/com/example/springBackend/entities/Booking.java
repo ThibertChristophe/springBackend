@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "BOOKING")
 public class Booking {
@@ -21,14 +23,16 @@ public class Booking {
   @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
   @JoinColumn(name = "home_id") // Pas obligatoire si bien suivit les conventions Spring
   private Home home;
+  private Date date_created;
 
   public Booking() {
   }
 
-  public Booking(int id, User user, Home home) {
+  public Booking(int id, User user, Home home, Date date_created) {
     this.id = id;
     this.user = user;
     this.home = home;
+    this.date_created = date_created;
   }
 
   public int getId() {
@@ -55,4 +59,11 @@ public class Booking {
     this.home = home;
   }
 
+  public Date getDate_created() {
+    return date_created;
+  }
+
+  public void setDate_created(Date date_created) {
+    this.date_created = date_created;
+  }
 }

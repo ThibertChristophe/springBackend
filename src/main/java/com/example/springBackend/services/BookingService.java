@@ -8,6 +8,7 @@ import com.example.springBackend.entities.User;
 import com.example.springBackend.exceptions.BookingNotFoundException;
 import com.example.springBackend.repositories.BookingRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,6 +33,7 @@ public class BookingService {
     Home home = homeService.read(booking.getHome().getId());
     booking.setUser(user);
     booking.setHome(home);
+    booking.setDate_created(Date.from(new Date().toInstant()));
     this.bookingRepository.save(booking);
   }
 
