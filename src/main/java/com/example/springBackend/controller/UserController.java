@@ -1,6 +1,7 @@
 
 package com.example.springBackend.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -39,8 +40,9 @@ class UserController {
 
   @ResponseStatus(value = HttpStatus.CREATED)
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public void create(@RequestBody User user) {
+  public ResponseEntity<User> create(@RequestBody User user) {
     this.userService.create(user);
+    return ResponseEntity.created(URI.create("user/" + user.getId())).build();
   }
 
   @ResponseStatus(value = HttpStatus.NO_CONTENT)
