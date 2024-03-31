@@ -31,4 +31,11 @@ public class GlobalExceptionHandler {
   public @ResponseBody ErrorResponse handleBookingNotFoundException(BookingNotFoundException ex) {
       return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
   }
+  
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  @ExceptionHandler(RuntimeException.class)
+  public @ResponseBody ErrorResponse handleRuntimeException(RuntimeException ex) {
+    return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
+  }
+
 }

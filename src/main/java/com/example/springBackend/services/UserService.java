@@ -29,7 +29,7 @@ public class UserService implements UserDetailsService{
       this.validationService = validationService;
   }
 
-  public void create(User user) {
+  public User create(User user) {
     if(!user.getEmail().contains("@")) throw new RuntimeException("Email invalide");
     User userFound = this.userRepository.findByEmail(user.getEmail());
     if (userFound == null) {
@@ -37,10 +37,12 @@ public class UserService implements UserDetailsService{
       roleUser.setTypeRole(TypeRole.USER);
       user.setRole(roleUser);
       user.setPassword(this.passwordEncoder.encode(user.getPassword()));
-      user = this.userRepository.save(user);
+      User userSaved = this.userRepository.save(user);
+      return userSaved;
       // Cree une validation de compte
-      this.validationService.register(user);
+      //this.validationService.register(userSaved);
     }
+    throw new RuntimeException("Un utilisateur avec cet email existe déjà");
   }
 
   public List<User> readAll() {

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springBackend.entities.User;
 import com.example.springBackend.services.UserService;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("user")
@@ -40,9 +41,12 @@ class UserController {
 
   @ResponseStatus(value = HttpStatus.CREATED)
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<User> create(@RequestBody User user) {
-    this.userService.create(user);
-    return ResponseEntity.created(URI.create("user/" + user.getId())).build();
+  public ResponseEntity<?> create(@RequestBody User user) {
+    User userResult = this.userService.create(user);
+    URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+            .buildAndExpand(userResult.getId())
+            .toUri();
+    return ResponseEntity.created(location).build();
   }
 
   @ResponseStatus(value = HttpStatus.NO_CONTENT)
