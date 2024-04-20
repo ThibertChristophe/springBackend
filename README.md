@@ -1,3 +1,3 @@
 # Spring Backend
-Web api Spring using
+Web api Spring Boot using
 JPA, MVC, JWT
